@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import '../BD/database.dart';
-import '../models/chofer.dart'; // ✅ Importación del modelo
+import '../models/chofer.dart';
 
 class ChoferService {
   static Future<String> obtenerIdDispositivo() async {
