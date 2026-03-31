@@ -61,7 +61,7 @@ class VentaDetalleService {
       vd.status,
       vd.idproducto,
       vd.folio,
-      p.describcion AS descripcion, -- ✅ corregido aquí
+      p.describcion AS descripcion,
       (
         SELECT precio
         FROM precioProducto
@@ -106,19 +106,19 @@ class VentaDetalleService {
     final db = await DBProvider.getDatabase();
     return await db.query(
       'ventaDetalle',
-      orderBy: 'idvd ASC', // opcional: orden por idvd ascendente
+      orderBy: 'idvd ASC', 
     );
   }
 
   static Future<List<VentaDetalle>> getDetallesPorQR(String qrBuscado) async {
     final db = await DBProvider.getDatabase();
     final resultados = await db.query(
-      'ventaDetalle',  // Nombre real de tu tabla
+      'ventaDetalle', 
       columns: [
         'idvd',
         'idVenta',
         'qr',
-        'pesoNeto',    // Asegúrate de usar exactamente tu nombre de columna
+        'pesoNeto',    
         'subtotal',
         'status',
         'idproducto',
@@ -142,7 +142,6 @@ class VentaDetalleService {
     GROUP BY p.describcion
   ''');
 
-    // Convertimos el resultado en un mapa tipo { "Mango": 5, "Manzana": 3 }
     final Map<String, int> conteo = {};
     for (var fila in resultado) {
       final descripcion = fila['descripcion'] as String;
@@ -187,7 +186,7 @@ class VentaDetalleService {
       p.describcion AS descripcion, 
       COUNT(*) AS cantidad, 
       SUM(vd.pesoNeto) AS pesoTotal,
-      SUM(vd.subtotal) AS subtotalReal,  -- ✅ esto es lo importante
+      SUM(vd.subtotal) AS subtotalReal,  
       MAX(vd.precio) AS precio
     FROM ventaDetalle vd
     JOIN producto p ON vd.idproducto = p.idproducto
@@ -213,7 +212,7 @@ class VentaDetalleService {
     return Sqflite.firstIntValue(resultado) ?? 0;
   }
 
-  //calculando el total xd
+  //calculando el total 
   static Future<double> calcularTotalPorMetodoPago(DateTime fecha, String metodoPago) async {
     final db = await DBProvider.getDatabase();
     final fechaStr = DateFormat('yyyy-MM-dd').format(fecha);
