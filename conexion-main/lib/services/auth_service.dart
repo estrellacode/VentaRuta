@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../BD/database.dart';
 import '../BD/global.dart';
-import '../models/chofer.dart'; // 👈 Importamos el modelo
+import '../models/chofer.dart'; 
 import '../services/chofer_servise.dart';
 
 class AuthService {
   static Future<Map<String, dynamic>?> loginApi(
     String email,
-    String password /*, String deviceId*/,
+    String password 
   ) async {
     final url = Uri.parse('');
 
@@ -26,7 +26,7 @@ class AuthService {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
 
-        // 👇 Integramos el modelo
+        // Integramos el modelo
         final Chofer? choferLocal = await ChoferService.getNameByCorreo(email);
         if (choferLocal != null) {
           await AuthService.updateTokenByCorreo(email, data['access_token']);
@@ -39,7 +39,7 @@ class AuthService {
           'pase': data['pase'],
           'expires_at': data['expires_at'],
           'correo': email,
-          'nombre': choferLocal?.nombre, // 👈 Ahora usando el modelo
+          'nombre': choferLocal?.nombre, //  Ahora usando el modelo
         };
       }
     } catch (e) {
