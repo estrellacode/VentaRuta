@@ -18,7 +18,7 @@ Durante el desarrollo se realizaron pruebas para asegurar el correcto funcionami
 - Validación de sincronización con API  
 - Pruebas en manejo de errores de conexión  
 
-## Casos de prueba realizados
+# Casos de prueba realizados:
 
 # Escaneo de productos
 - Escaneo correcto de códigos válidos  
