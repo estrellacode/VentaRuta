@@ -26,7 +26,7 @@ class VentaService {
       whereArgs: [nuevoId],
     );
     if (rows.isNotEmpty) {
-      print('✅ Venta almacenada:');
+      print('Venta almacenada:');
       print(rows.first); // Aquí verás metodoPago y demás campos
     }
 
@@ -134,7 +134,7 @@ class VentaService {
   Future<void> generarJsonSinRepetir({int tamanoGrupo = 2}) async {
     final idChofer = UsuarioActivo.idChofer;
     if (idChofer == null) {
-      print('❌ Chofer no autenticado.');
+      print('Chofer no autenticado.');
       return;
     }
 
@@ -163,7 +163,7 @@ class VentaService {
     final ventas = ventasNoSync.map((m) => Venta.fromMap(m)).toList();
 
     if (ventas.isEmpty) {
-      print('⚠️ No hay ventas nuevas para generar JSON.');
+      print(' No hay ventas nuevas para generar JSON.');
       return;
     }
 
@@ -206,11 +206,11 @@ class VentaService {
         'ventas': listaVentasJson,
       };
 
-      // 👉 Mostrar en consola
-      print('🧾 JSON generado (sin repetir):');
+      //  Mostrar en consola
+      print('JSON generado (sin repetir):');
       print(const JsonEncoder.withIndent('  ').convert(jsonCompleto));
 
-      // ✅ Marcar como sincronizadas
+      // Marcar como sincronizadas
       final batch = db.batch();
       for (final venta in grupo) {
         batch.update(
